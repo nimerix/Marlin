@@ -1603,3 +1603,4 @@
 #endif
 
 #undef HAS_FREE_AUX2_PINS
+#undef DIAG_REMAPPED
