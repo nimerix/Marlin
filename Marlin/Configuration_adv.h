@@ -510,7 +510,11 @@
 //
 // For Z set the number of stepper drivers
 //
-#define NUM_Z_STEPPER_DRIVERS 2   // (1-4) Z options change based on how many
+#ifdef ENABLE_QUAD_Z
+  #define NUM_Z_STEPPER_DRIVERS 4   // (1-4) Z options change based on how many
+#else
+  #define NUM_Z_STEPPER_DRIVERS 2   // (1-4) Z options change based on how many
+#endif // ENABLE_QUAD_Z
 
 #if NUM_Z_STEPPER_DRIVERS > 1
   //#define Z_MULTI_ENDSTOPS
@@ -872,7 +876,7 @@
 //#define MICROSTEP32 HIGH,LOW,HIGH
 
 // Microstep setting (Only functional when stepper driver microstep pins are connected to MCU.
-#define MICROSTEP_MODES { 32, 32, 32, 32, 32, 32 } // [1,2,4,8,16]
+#define MICROSTEP_MODES { 1, 2, 4, 8, 16, 32, 64, 128 } // [1,2,4,8,16]
 
 /**
  *  @section  stepper motor current

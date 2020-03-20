@@ -156,6 +156,36 @@
   #define Z2_CS_PIN        P1_01
 #endif
 
+#ifdef ENABLE_QUAD_Z
+// Remap EXP pins
+/**
+ *              _____                                             _____
+ *          NC | · · | GND                                    5V | · · | GND
+ *       RESET | · · | 1.31(Z3_CS)                (Z3_STEP) 1.23 | · · | 1.22 (Z4_STEP)
+ *  (MOSI)0.18 | · · | 3.25(BTN_EN2)               (Z3_DIR) 1.21 | · · | 1.20 (Z4_DIR)
+ * (SD_SS)0.16 | · · | 3.26(BTN_EN1)                (Z3_EN) 1.19 | · · | 1.18 (Z4_EN)
+ *   (SCK)0.15 | · · | 0.17(MISO)                 (BTN_ENC) 0.28 | · · | 1.30 (Z4_CS)
+ *              -----                                             -----
+ *              EXP2                                              EXP1
+ */
+
+#define Z3_STEP_PIN        P1_23
+#define Z3_DIR_PIN         P1_21
+#define Z3_ENABLE_PIN      P1_19
+#ifndef Z3_CS_PIN
+  #define Z3_CS_PIN        P1_31
+#endif
+
+#define Z4_STEP_PIN        P1_22
+#define Z4_DIR_PIN         P1_20
+#define Z4_ENABLE_PIN      P1_18
+#ifndef Z4_CS_PIN
+  #define Z4_CS_PIN        P1_30
+#endif
+
+#endif // ENABLE_QUAD_Z
+
+
 #define TEMP_1_PIN         P0_23_A0   // A2 (T2) - (69) - TEMP_1_PIN
 #define TEMP_BED_PIN       P0_25_A2   // A0 (T0) - (67) - TEMP_BED_PIN
 
@@ -213,6 +243,14 @@
 
   #define Z2_SERIAL_TX_PIN P1_01
   #define Z2_SERIAL_RX_PIN P1_01
+
+  #ifdef ENABLE_QUAD_Z
+    #define Z3_SERIAL_TX_PIN P1_31
+    #define Z3_SERIAL_RX_PIN P1_31
+
+    #define Z4_SERIAL_TX_PIN P1_30
+    #define Z4_SERIAL_RX_PIN P1_30
+  #endif // ENABLE_QUAD_Z
 
   // Reduce baud rate to improve software serial reliability
   #define TMC_BAUD_RATE 19200
